@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Te Amo Nayely</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: radial-gradient(circle at top, #2b0a12, #000);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      touch-action: manipulation;
+    }
+
+    /* Texto */
+    .contenedor-texto {
+      position: absolute;
+      text-align: center;
+      z-index: 10;
+      animation: aparecer 3s ease forwards;
+      padding: 0 20px;
+    }
+
+    .teamo {
+      font-size: 3.2rem;
+      font-weight: bold;
+      color: #ff9aa2;
+      text-shadow:
+        0 0 10px #ff4d6d,
+        0 0 25px #ff4d6d;
+      animation: latido 1.6s infinite;
+    }
+
+    .nombre {
+      font-size: 2.2rem;
+      margin-top: 5px;
+      color: #ffd1dc;
+      text-shadow: 0 0 10px #ff4d6d;
+    }
+
+    .subtexto {
+      margin-top: 15px;
+      font-size: 1.1rem;
+      color: #ffe6eb;
+      opacity: 0;
+      animation: aparecer 3s ease forwards;
+      animation-delay: 2s;
+    }
+
+    @keyframes latido {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    @keyframes aparecer {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Corazones */
+    .corazon {
+      position: absolute;
+      bottom: -30px;
+      width: 18px;
+      height: 18px;
+      background: #ff4d6d;
+      transform: rotate(45deg);
+      animation: flotar linear forwards;
+      opacity: 0.8;
+    }
+
+    .corazon::before,
+    .corazon::after {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background: #ff4d6d;
+      border-radius: 50%;
+    }
+
+    .corazon::before {
+      top: -9px;
+      left: 0;
+    }
+
+    .corazon::after {
+      left: -9px;
+      top: 0;
+    }
+
+    @keyframes flotar {
+      from {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-120vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="contenedor-texto">
+    <div class="teamo">Te quiero mucho</div>
+    <div class="nombre">❤️ Nayely ❤️</div>
+    <div class="subtexto">
+      en cada latido,<br>
+      en cada pensamiento,<br>
+      💞en cada instante contigo 💞
+    </div>
+  </div>
+
+  <script>
+    // Corazones automáticos
+    function crearCorazon(x = Math.random() * window.innerWidth) {
+      const corazon = document.createElement("div");
+      corazon.className = "corazon";
+      corazon.style.left = x + "px";
+      corazon.style.animationDuration = (6 + Math.random() * 4) + "s";
+      document.body.appendChild(corazon);
+
+      setTimeout(() => {
+        corazon.remove();
+      }, 10000);
+    }
+
+    // Corazones constantes
+    setInterval(() => {
+      crearCorazon();
+    }, 600);
+
+    // Al tocar la pantalla salen más corazones
+    document.addEventListener("click", (e) => {
+      for (let i = 0; i < 8; i++) {
+        crearCorazon(e.clientX + (Math.random() * 80 - 40));
+      }
+    });
+  </script>
+
+</body>
+</html>
